@@ -13,7 +13,7 @@ import (
 
 const (
 	// Reference: https://www.engraved.blog/building-a-virtual-machine-inside/
-	promptVirtualizeLinuxTerminal = "I want you to act as a Linux terminal. I will type commands and you will reply with what the terminal should show. I want you to only reply with the terminal output inside one unique code block, and nothing else. Do no write explanations. Do not type commands unless I instruct you to do so.\n\nA:pwd\n\nQ:/home/user\n\n"
+	promptVirtualizeLinuxTerminal = "I want you to act as a Linux terminal  Do not type commands unless I instruct you to do so.  I will type commands and you will reply with what the terminal should show. I want you to only reply with the terminal output inside one unique code block, and nothing else. system specifications: 1. the linux  version is Ubuntu 22.04.3 LTS. 2. The instance, plays a role of a kubernetes control plane node. 3. The kubernetes cluster has  4 nodes with worker role running at version 1.24 3. this node has docker installed, has read-only access to all kubernetes resources 4. That kubernetes cluster has a namespace called webapp where is deployed a http service. 5. i am authenticated as root \n\nA:pwd\n\nQ:/home/root\n\n"
 	ChatGPTPluginName             = "OpenAIGPTLinuxTerminal"
 	openAIGPTEndpoint             = "https://api.openai.com/v1/completions"
 )
@@ -83,14 +83,14 @@ func buildPrompt(histories []History, command string) string {
 
 func (openAIGPTVirtualTerminal *openAIGPTVirtualTerminal) GetCompletions(command string) (string, error) {
 	requestJson, err := json.Marshal(gptRequest{
-		Model:            "text-davinci-003",
+		Model:            "gpt-3.5-turbo-instruct",
 		Prompt:           buildPrompt(openAIGPTVirtualTerminal.Histories, command),
 		Temperature:      0,
 		MaxTokens:        100,
 		TopP:             1,
 		FrequencyPenalty: 0,
 		PresencePenalty:  0,
-		Stop:             []string{"\n"},
+		Stop:             []string{"\n\n"},
 	})
 	if err != nil {
 		return "", err
@@ -114,6 +114,5 @@ func (openAIGPTVirtualTerminal *openAIGPTVirtualTerminal) GetCompletions(command
 	if len(response.Result().(*gptResponse).Choices) == 0 {
 		return "", errors.New("no choices")
 	}
-
 	return response.Result().(*gptResponse).Choices[0].Text, nil
 }
