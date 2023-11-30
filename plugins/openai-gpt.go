@@ -106,7 +106,7 @@ func (openAIGPTVirtualTerminal *openAIGPTVirtualTerminal) GetCompletions(command
 		SetAuthToken(openAIGPTVirtualTerminal.openAIKey).
 		SetResult(&gptResponse{}).
 		Post(openAIGPTEndpoint)
-
+	//fmt.Println(response)
 	if err != nil {
 		return "", err
 	}
