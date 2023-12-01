@@ -3,6 +3,7 @@ apiVersion: autoscaling/v2
 kind: HorizontalPodAutoscaler
 metadata:
   name: {{ include "beelzebub-chart.fullname" . }}
+  namespace: {{ include "beelzebub-chart.fullname" . }}
   labels:
     {{- include "beelzebub-chart.labels" . | nindent 4 }}
 spec:

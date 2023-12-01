@@ -1,0 +1,8 @@
+{{- if .Values.autoscaling.enabled }}
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: {{ include "beelzebub-chart.fullname" . }}
+  labels:
+    name: {{ include "beelzebub-chart.fullname" . }}
+{{end}}
