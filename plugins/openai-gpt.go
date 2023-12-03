@@ -86,7 +86,7 @@ func (openAIGPTVirtualTerminal *openAIGPTVirtualTerminal) GetCompletions(command
 		Model:            "gpt-3.5-turbo-instruct",
 		Prompt:           buildPrompt(openAIGPTVirtualTerminal.Histories, command),
 		Temperature:      0,
-		MaxTokens:        100,
+		MaxTokens:        1000,
 		TopP:             1,
 		FrequencyPenalty: 0,
 		PresencePenalty:  0,

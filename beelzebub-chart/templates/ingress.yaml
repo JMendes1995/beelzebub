@@ -16,7 +16,7 @@ apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: {{ $fullName }}
-  namespace: {{ $fullName }}
+  namespace: {{ .Values.namespace  }}
   labels:
     {{- include "beelzebub-chart.labels" . | nindent 4 }}
   {{- with .Values.ingress.annotations }}

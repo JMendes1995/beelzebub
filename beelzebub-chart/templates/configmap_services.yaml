@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: "beelzebub-services"
-  namespace: {{ include "beelzebub-chart.fullname" . }}
+  namespace: {{ .Values.namespace  }}
   labels:
     {{- include "beelzebub-chart.labels" . | nindent 4 }}
 data:

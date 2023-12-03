@@ -4,9 +4,9 @@ replicaCount: 3
 image:
   repository: jmendes18/belz
   pullPolicy: IfNotPresent
-  tag: v1.0.0
+  tag: v1.0.1
 
-
+namespace: belz
 beelzebubCoreConfigs: |
     core:
       logging:
@@ -35,7 +35,7 @@ beelsebubServiceConfigs: |
   passwordRegex: "^(root|qwerty|Smoker666|123456|jenkins|minecraft|sinus|alex|postgres|Ly123456)$"
   deadlineTimeoutSeconds: 60
   plugin:
-    openAPIChatGPTSecretKey: "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"
+    openAPIChatGPTSecretKey: ""
 
 # Port and address(beelsebubServiceConfigs) must equals.
 service:
